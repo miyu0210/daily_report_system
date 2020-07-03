@@ -46,7 +46,23 @@
 <h2>お探しのデータは見つかりませんでした。</h2>
 </c:otherwise>
 </c:choose>
-
+<c:choose>
+<%-- ログインとレポートを書いたユーザーが同一の場合は操作できないボタンを表示 --%>
+<c:when test="${sessionScope.login_employee.id == report.employee.id}">
+<button type="button" name="no"><i class="far fa-thumbs-up"></i></button>
+</c:when>
+<%-- いいね出来るボタンを表示 --%>
+<c:when test="${yoine == 'plus'}">
+<c:import url="yoine.jsp" />
+</c:when>
+<%-- いいねしていた場合は削除ボタンを表示 --%>
+<c:when test="${yoine == 'mainasu'}">
+<c:import url="yoineDelete.jsp" />
+</c:when>
+</c:choose>
+<div>
+このレポートは${yoineCount}いいねあり
+</div>
 <p><a href="<c:url value="/reports/index" />">一覧に戻る</a></p>
 </c:param>
 </c:import>
